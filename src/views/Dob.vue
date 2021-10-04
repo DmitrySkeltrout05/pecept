@@ -9,7 +9,7 @@
         <md-card-content>
           Заполнив эту карточку и отправив,<br />
           вы сможете разместить на сайте своё блюдо<br />
-          Связь с разроботичком: Moia-pochta@mail.ru
+          Связь с разроботичком: @mail.ru
         </md-card-content>
         <div class="md-layout md-gutter md-alignment-center-center">
           <div class="md-layout-item md-size-90">
@@ -27,7 +27,8 @@
             </md-field>
             <md-field>
               <label>Фотография</label>
-              <md-file v-model="form.dishPhoto" />
+              <md-input v-model="form.dishPhoto" />
+              <span class="md-helper-text">Ссылку на фото в интернете</span>
             </md-field>
             <md-field>
               <label>Продукты</label>
@@ -51,7 +52,7 @@
           </div>
         </div>
         <md-card-actions>
-          <md-button v-on:click="clearForm">Отправить</md-button>
+          <md-button v-on:click="send">Отправить</md-button>
         </md-card-actions>
       </md-card>
     </div>
@@ -59,9 +60,13 @@
 </template>
 
 <script>
+import firebase from "../../firebaseinit";
+import "firebase/firestore";
+const db = firebase.firestore();
+
 export default {
-  data: function(){
-    return{
+  data: function () {
+    return {
       form: {
         nameFamily: null,
         dishName: null,
@@ -71,24 +76,33 @@ export default {
         recipe: null,
         time: null,
         mail: null,
-      }
-    }
+      },
+    };
   },
   methods: {
-    send: function(){
-      console.log(this.form)
+    send: function () {
+      db.collection("Zayavki")
+        .add(this.form)
+        .then((docRef) => {
+          console.log("Document written with ID: ", docRef.id);
+        })
+        .catch((error) => {
+          console.error("Error adding document: ", error);
+        });
+      console.log(this.form);
+      this.clearForm();
     },
-    clearForm: function(){
-      this.form.nameFamily = null
-      this.form.dishName = null
-      this.form.dishNational = null
-      this.form.dishPhoto = null
-      this.form.products = null
-      this.form.recipe = null
-      this.form.time = null
-      this.form.mail = null
-    }
-  }
+    clearForm: function () {
+      this.form.nameFamily = null;
+      this.form.dishName = null;
+      this.form.dishNational = null;
+      this.form.dishPhoto = null;
+      this.form.products = null;
+      this.form.recipe = null;
+      this.form.time = null;
+      this.form.mail = null;
+    },
+  },
 };
 </script>
 

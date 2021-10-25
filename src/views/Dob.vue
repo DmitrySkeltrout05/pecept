@@ -9,12 +9,12 @@
         <md-card-content>
           Заполнив эту карточку и отправив,<br />
           вы сможете разместить на сайте своё блюдо<br />
-          Связь с разроботичком: @mail.ru
+          Связь с разроботчиком: @mail.ru
         </md-card-content>
         <div class="md-layout md-gutter md-alignment-center-center">
           <div class="md-layout-item md-size-90">
             <md-field>
-              <label>Имя и фамилия</label>
+              <label>Фамилия и имя</label>
               <md-input v-model="form.nameFamily"></md-input>
             </md-field>
             <md-field>

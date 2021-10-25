@@ -39,6 +39,9 @@
 <script>
 import basa from "../components/basa";
 import pecept from "../recepti/pecept";
+import firebase from "../../firebaseinit";
+import "firebase/firestore";
+const db = firebase.firestore();
 export default {
   name: "about",
   components: { basa },
@@ -79,12 +82,21 @@ export default {
     },
   },
   mounted: function () {
-    this.filtered = this.pecept;
-    for (let key in pecept) {
-      this.allKyxna.push(pecept[key].kyxna);
-    }
-    this.allKyxna = Array.from(new Set(this.allKyxna));
-    console.log(this.allKyxna);
+    // this.filtered = this.pecept;
+    // for (let key in pecept) {
+    //   this.allKyxna.push(pecept[key].kyxna);
+    // }
+    // this.allKyxna = Array.from(new Set(this.allKyxna));
+    // console.log(this.allKyxna);
+
+db.collection("Zayavki")
+    .onSnapshot((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            this.pecept.push(doc.data());
+        });
+        console.log("Ycpex");
+    });
+
   },
 };
 </script>

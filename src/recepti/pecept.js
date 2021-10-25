@@ -39,5 +39,13 @@ export default {
         dis: "da",
         img: "https://centspec.ru/uploads/413464-9c183c2f2550e70d5b6ad8165547800d.jpg",
         kyxna: "Японская кухня"
+    },
+    r6: {
+        name: "Борка2",
+        ing: ["свекла", "вода", "соль", "капуста"],
+        time: "15 часов",
+        dis: "da",
+        img: "",
+        kyxna: "Украинская кухня"
     }
 }
